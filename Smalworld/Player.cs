@@ -10,7 +10,7 @@ namespace Smallworld
 		private readonly Board _board;
 		private readonly AvailableTribes _availableTribes;
 		
-		private int _coins;	
+		private int _coins = 5;	
 		//private Tribe _inDecline;
 		private Tribe _active;
 		
@@ -25,7 +25,7 @@ namespace Smallworld
 		
 		public IEnumerable<Region> OccupiedRegions
 		{
-			get { return _board.Regions.Where(r => r.OccupiedBy(_active.Race)); }
+			get { return _board.Regions.Where(r => r.OccupiedBy(this)); }
 		}
 		
 		public void SelectNewIfNeeded()
@@ -73,9 +73,15 @@ namespace Smallworld
 					int conquerTokens = r.RequiredTokens;
 					Console.WriteLine("{0} conquers a region using {1} tokens", _player.Name, conquerTokens);
 					_tokensInHand -= conquerTokens;
-					r.OccupyBy(_active.Race, conquerTokens);
+					r.OccupyBy(this, conquerTokens);
 				}
 			}
+		}
+		
+		public void PickUp(int tokens)
+		{
+			Console.WriteLine("{0} picks up {1} tokens", _player.Name, tokens);
+			_tokensInHand += tokens;
 		}
 		
 		public Tribe Active { get { return _active; } }
@@ -87,11 +93,16 @@ namespace Smallworld
 			{
 				if (OccupiedRegions.Any()) 
 				{
-					return Regions.AdjecentTo(OccupiedRegions).Except(Edge);
+					return Regions.AdjecentTo(OccupiedRegions).Except(Edge).Where(Affordable);
 				}
 				// first turn - Only edge adjecent regions are availible
-				return _board.Edge.Adjecent;
+				return _board.Edge.Adjecent.Where(Affordable);
 			}
+		}
+	
+		private bool Affordable(Region r)
+		{
+			return r.RequiredTokens <= _tokensInHand + Dice.MaxValue;
 		}
 		
 		private IEnumerable<Region> Edge { get { yield return Region.Edge; } }

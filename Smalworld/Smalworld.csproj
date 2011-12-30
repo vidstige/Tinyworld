@@ -48,6 +48,7 @@
     <Compile Include="AvailableTribes.cs" />
     <Compile Include="Common\Range.cs" />
     <Compile Include="Regions.cs" />
+    <Compile Include="Dice.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

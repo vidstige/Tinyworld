@@ -10,6 +10,7 @@ namespace Smallworld
 		
 		private Race _race;
 		private int _tokens;
+		private Player _occupyingPlayer;
 		
 		public static Region Edge = new Region(null);
 		
@@ -23,17 +24,22 @@ namespace Smallworld
 			get { return 2 + _tokens; }
 		}
 		
-		public void OccupyBy(Race race, int tokens)
+		internal void OccupyBy(Player player, int tokens)
 		{
 			if (_terrain == null) throw new InvalidOperationException("Cannot occupy the Edge");
-			_race = race;
-			// TODO: Return one token to the owning player, move one token to thrash
+			
+			// 1. Thrash one token.
+			// 2. Return all other tokens to player (TODO: if they are active)
+			if (_occupyingPlayer != null) _occupyingPlayer.PickUp(_tokens - 1);
+			
+			_race = player.Active.Race;
+			_occupyingPlayer = player;
 			_tokens = tokens;
 		}
 		
-		public bool OccupiedBy(Race race)
+		internal bool OccupiedBy(Player player)
 		{
-			return _race == race;
+			return _occupyingPlayer == player;
 		}
 		
 		public int PickUpAllButOne()

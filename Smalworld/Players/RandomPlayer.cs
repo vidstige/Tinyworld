@@ -6,6 +6,7 @@ namespace Smallworld
 {
 	public class RandomPlayer: IPlayer
 	{
+		
 		public string Name { get; set; }
 		
 		public Tribe SelectTribe(IEnumerable<Tribe> availableTribes)
