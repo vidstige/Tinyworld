@@ -6,17 +6,24 @@ namespace Smallworld
 {
 	public class RandomPlayer: IPlayer
 	{
+		private Random r;
 		
-		public string Name { get; set; }
+		public RandomPlayer(string name)
+		{
+			Name = name;
+			r = new Random(name.GetHashCode());
+		}
+		
+		public string Name { get; private set; }
 		
 		public Tribe SelectTribe(IEnumerable<Tribe> availableTribes)
 		{
-			return availableTribes.First();
+			return r.One(availableTribes);
 		}
 		
 		public Region Conquer(IEnumerable<Region> availibleForConquer)
 		{
-			return availibleForConquer.First();
+			return r.One(availibleForConquer);
 		}
 	}
 }

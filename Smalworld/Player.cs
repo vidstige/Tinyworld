@@ -58,6 +58,7 @@ namespace Smallworld
 			while (_tokensInHand > 0 && !lastAttemptPerformed)
 			{
 				IEnumerable<Region> availibleForConquer = AvailibleForConquer;
+				Console.WriteLine("{0} has {1} regions to choose from...", _player.Name, availibleForConquer.Count());
 				Region r = _player.Conquer(availibleForConquer);
 				
 				if (r == null) return; // players may return null to end conquering..
@@ -71,7 +72,7 @@ namespace Smallworld
 				else
 				{
 					int conquerTokens = r.RequiredTokens;
-					Console.WriteLine("{0} conquers a region using {1} tokens", _player.Name, conquerTokens);
+					Console.WriteLine("...and conquers a region using {1} tokens", _player.Name, conquerTokens);
 					_tokensInHand -= conquerTokens;
 					r.OccupyBy(this, conquerTokens);
 				}

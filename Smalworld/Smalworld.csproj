@@ -49,6 +49,7 @@
     <Compile Include="Common\Range.cs" />
     <Compile Include="Regions.cs" />
     <Compile Include="Dice.cs" />
+    <Compile Include="Common\RandomExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
