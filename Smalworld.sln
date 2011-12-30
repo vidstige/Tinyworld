@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "Smalworld\ConsoleApp.csproj", "{104E6682-6A2A-4CCE-A7EE-951AB7ED875A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalworld", "Smalworld\Smalworld.csproj", "{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{104E6682-6A2A-4CCE-A7EE-951AB7ED875A}.Debug|x86.ActiveCfg = Debug|x86
+		{104E6682-6A2A-4CCE-A7EE-951AB7ED875A}.Debug|x86.Build.0 = Debug|x86
+		{104E6682-6A2A-4CCE-A7EE-951AB7ED875A}.Release|x86.ActiveCfg = Release|x86
+		{104E6682-6A2A-4CCE-A7EE-951AB7ED875A}.Release|x86.Build.0 = Release|x86
+		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Debug|x86.Build.0 = Debug|Any CPU
+		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Smalworld\ConsoleApp.csproj
+	EndGlobalSection
+EndGlobal
