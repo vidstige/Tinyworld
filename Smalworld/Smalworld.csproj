@@ -46,9 +46,12 @@
     <Compile Include="Players\RandomPlayer.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="AvailableTribes.cs" />
+    <Compile Include="Common\Range.cs" />
+    <Compile Include="Regions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Players\" />
+    <Folder Include="Common\" />
   </ItemGroup>
 </Project>

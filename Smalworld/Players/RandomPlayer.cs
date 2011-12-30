@@ -10,5 +10,10 @@ namespace Smallworld
 		{
 			return availableTribes.First();
 		}
+		
+		public Region Conquer(IEnumerable<Region> availibleForConquer)
+		{
+			return availibleForConquer.First();
+		}
 	}
 }

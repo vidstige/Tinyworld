@@ -35,7 +35,7 @@ namespace Smallworld
 			
 			var southSea = new Region(Terrain.Sea);
 			
-			var edge = new Region(null);
+			var edge = Region.Edge;
 			
 			northsea.ConnectWith(edge);
 			northsea.ConnectWith(northFarm);

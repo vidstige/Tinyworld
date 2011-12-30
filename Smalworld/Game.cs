@@ -29,6 +29,8 @@ namespace Smallworld
 				{
 					p.SelectNewIfNeeded();
 					p.GatherTokens();
+					// TODO: Allow the player to abandon regions
+					p.Conquer();
 				}
 			}
 		}
