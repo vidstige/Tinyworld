@@ -1,21 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Smallworld
 {
 	public class AvailableTribes
 	{
-		private IList<Ability> _abilities = new List<Ability>();
-		private IList<Race> _races = new List<Race>();
-			
-		public AvailableTribes()
-		{
-			_abilities.Add(Ability.Plain);
-		}
-		
+		private List<Tribe> _tmp = new List<Tribe> { new Tribe(Ability.Plain, Race.Joes) };
 		public IEnumerable<Tribe> Tribes
 		{
-			get { return null; }
+			get
+			{
+				return _tmp;
+			}
 		}
 	}
 }

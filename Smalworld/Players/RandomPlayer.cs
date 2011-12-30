@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Smallworld
 {
@@ -7,7 +8,7 @@ namespace Smallworld
 	{
 		public Tribe SelectTribe(IEnumerable<Tribe> availableTribes)
 		{
-			throw new NotImplementedException ();
+			return availableTribes.First();
 		}
 	}
 }

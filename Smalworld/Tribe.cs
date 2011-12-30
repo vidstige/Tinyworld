@@ -13,5 +13,10 @@ namespace Smallworld
 			_ability = ability;
 			_race = race;
 		}
+		
+		public int StartingTokens
+		{
+			get { return _ability.StartingTokens + _race.StartingTokens; }
+		}
 	}
 }

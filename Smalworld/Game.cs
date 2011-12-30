@@ -16,16 +16,19 @@ namespace Smallworld
 			_board = BoardBuilder.CreateTwoPlayer();
 			_numberOfTurns = 10;
 			_players = new List<Player>(2);
-			foreach (var p in players) _players.Add(new Player(p));
+			var at = new AvailableTribes();
+			foreach (var p in players) _players.Add(new Player(p, _board, at));
 		}
 		
 		public void Run()
 		{
-			for (int turn = 1; turn < _numberOfTurns; turn++)
+			for (int turn = 1; turn <= _numberOfTurns; turn++)
 			{
+				Console.WriteLine("--- Turn: " + turn + " starting ---");
 				foreach (var p in _players)
 				{
 					p.SelectNewIfNeeded();
+					p.GatherTokens();
 				}
 			}
 		}

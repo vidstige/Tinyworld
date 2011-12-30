@@ -21,6 +21,6 @@ Global
 		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Smalworld\Smalworld.csproj
+		StartupItem = ConsoleApp\ConsoleApp.csproj
 	EndGlobalSection
 EndGlobal
