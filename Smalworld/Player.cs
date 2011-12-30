@@ -18,10 +18,13 @@ namespace Smallworld
 		
 		public Player(IPlayer player, Board board, AvailableTribes availableTribes)
 		{
+			if (player == null) throw new ArgumentNullException("player");
 			_player = player;
 			_board = board;
 			_availableTribes = availableTribes;
 		}
+
+		public string Name { get { return _player.Name; } }
 		
 		public IEnumerable<Region> OccupiedRegions
 		{
@@ -79,6 +82,13 @@ namespace Smallworld
 			}
 		}
 		
+		public void GainCoins ()
+		{
+			int n = OccupiedRegions.Count();
+			Console.WriteLine("{0} gains {1} coins", _player.Name, n);
+			_coins += n;
+		}
+
 		public void PickUp(int tokens)
 		{
 			Console.WriteLine("{0} picks up {1} tokens", _player.Name, tokens);

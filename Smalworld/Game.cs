@@ -32,9 +32,15 @@ namespace Smallworld
 					// TODO: Allow the player to abandon regions
 					p.Conquer();
 					// TODO: Allow player to distribute tokens
+					
+					p.GainCoins();
 				}
 			}
+			Console.WriteLine("Game Over");
+			foreach (var p in _players)
+			{
+				Console.WriteLine("{0}: {1}", p.Name, p.Coins);
+			}
 		}
-		
 	}
 }
