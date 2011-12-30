@@ -1,11 +1,13 @@
 using System;
+using System.Collections.Generic;
 
 namespace Smallworld
 {
-	public class RandomPlayer
+	public class RandomPlayer: IPlayer
 	{
-		public RandomPlayer ()
+		public Tribe SelectTribe(IEnumerable<Tribe> availableTribes)
 		{
+			throw new NotImplementedException ();
 		}
 	}
 }

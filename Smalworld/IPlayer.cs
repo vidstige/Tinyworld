@@ -10,12 +10,12 @@ namespace Smallworld
 		
 		// called on the start of each turn to check if the players wants to make its current active 
 		// tribe go into decline
-		bool Decline();
+		//bool Decline();
 		
 		// Called each turn allowing the player to conquest regions if desired
-		void Conquest();
+		//void Conquest();
 		
 		// Called when no more conquests are made to allow the player to regroup
-		void Regroup();
+		//void Regroup();
 	}
 }
