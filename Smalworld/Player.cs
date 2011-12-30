@@ -32,21 +32,28 @@ namespace Smallworld
 		{ 
 			if (_active != null) return;
 			_active = _player.SelectTribe(_availableTribes.Tribes);
+			// TODO: Check so that _active is in _availableTribes.Tribes
+			_availableTribes.Remove(_active);
+			
 			_tokensInHand = _active.StartingTokens;
 			
-			//Console.WriteLine("Player " + _player.Name + " selected " + _active);
+			Console.WriteLine(_player.Name + " selected " + _active);
 		}
 		
 		public void GatherTokens()
 		{
 			foreach (Region r in OccupiedRegions)
 			{
-				_tokensInHand += r.PickUpAllButOne();
+				int n = r.PickUpAllButOne();
+				Console.WriteLine("{0} picks up {1} tokens", _player.Name, n);
+				_tokensInHand += n;
 			}
 		}
 		
 		public void Conquer()
 		{
+			Console.WriteLine("{0} has {1} tokens in hand", _player.Name, _tokensInHand);
+			
 			bool lastAttemptPerformed = false;
 			while (_tokensInHand > 0 && !lastAttemptPerformed)
 			{
@@ -58,11 +65,13 @@ namespace Smallworld
 				
 				if (r.RequiredTokens > _tokensInHand)
 				{
+					// TODO: Roll dice
 					lastAttemptPerformed = true;
 				}
 				else
 				{
 					int conquerTokens = r.RequiredTokens;
+					Console.WriteLine("{0} conquers a region using {1} tokens", _player.Name, conquerTokens);
 					_tokensInHand -= conquerTokens;
 					r.OccupyBy(_active.Race, conquerTokens);
 				}

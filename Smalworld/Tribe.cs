@@ -23,7 +23,7 @@ namespace Smallworld
 		
 		public override string ToString ()
 		{
-			return string.Format ("{0} {1}", Race, StartingTokens);
+			return string.Format ("{0} {1}", _ability.Description, Race.Name);
 		}
 	}
 }

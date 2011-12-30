@@ -25,6 +25,7 @@ namespace Smallworld
 		
 		public void OccupyBy(Race race, int tokens)
 		{
+			if (_terrain == null) throw new InvalidOperationException("Cannot occupy the Edge");
 			_race = race;
 			// TODO: Return one token to the owning player, move one token to thrash
 			_tokens = tokens;
