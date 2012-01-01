@@ -17,7 +17,8 @@ namespace Smallworld
 			_numberOfTurns = 10;
 			_players = new List<Player>(2);
 			var at = new AvailableTribes();
-			foreach (var p in players) _players.Add(new Player(p, _board, at));
+			var dice = new Dice(new Random(88));
+			foreach (var p in players) _players.Add(new Player(p, _board, at, dice));
 		}
 		
 		public void Run()
@@ -27,12 +28,19 @@ namespace Smallworld
 				Console.WriteLine("--- Turn: " + turn + " starting ---");
 				foreach (var p in _players)
 				{
-					p.SelectNewIfNeeded();
-					p.GatherTokens();
-					// TODO: Allow the player to abandon regions
-					p.Conquer();
-					// TODO: Allow player to distribute tokens
-					
+					if (p.Declines())
+					{
+						Console.WriteLine("{0} declines", p.Name);
+						p.Decline();
+					}
+					else
+					{
+						p.SelectNewIfNeeded();
+						p.GatherTokens();
+						// TODO: Allow the player to abandon regions
+						p.Conquer();
+						// TODO: Allow player to distribute tokens
+					}
 					p.GainCoins();
 				}
 			}

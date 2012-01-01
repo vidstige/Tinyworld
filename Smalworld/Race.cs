@@ -3,10 +3,7 @@ using System;
 namespace Smallworld
 {
 	public class Race
-	{
-		public static Race Joes = new Race("Joes", 5); // used for testing purposes.
-		public static Race Ratmen = new Race("Ratmen", 8); // used for testing purposes.
-		
+	{	
 		private readonly string _name;
 		private readonly int _startingTokens;
 		

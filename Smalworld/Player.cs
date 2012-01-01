@@ -9,19 +9,21 @@ namespace Smallworld
 		private readonly IPlayer _player;
 		private readonly Board _board;
 		private readonly AvailableTribes _availableTribes;
+		private readonly Dice _dice;
 		
 		private int _coins = 5;	
-		//private Tribe _inDecline;
 		private Tribe _active;
+		private Tribe _declining;
 		
 		private int _tokensInHand;
 		
-		public Player(IPlayer player, Board board, AvailableTribes availableTribes)
+		public Player(IPlayer player, Board board, AvailableTribes availableTribes, Dice dice)
 		{
 			if (player == null) throw new ArgumentNullException("player");
 			_player = player;
 			_board = board;
 			_availableTribes = availableTribes;
+			_dice = dice;
 		}
 
 		public string Name { get { return _player.Name; } }
@@ -31,9 +33,57 @@ namespace Smallworld
 			get { return _board.Regions.Where(r => r.OccupiedBy(this)); }
 		}
 		
+		private bool HasActiveTribe { get { return _active != null; } }
+		private bool HasDecliningTribe { get { return _declining != null; } }
+		
+		public bool Declines()
+		{
+			if (!HasActiveTribe) return false;
+			
+			return _player.Declines();
+		}
+		
+		public void Decline()
+		{
+			if (HasDecliningTribe)
+			{
+				// 1. Remove all declining tribe tokens
+				foreach (var region in _board.Regions.Where(OccupiedByDecliningRace))
+				{
+					region.Extinct();
+				}
+			}
+
+			// 2. Remove all but one active tribe tokens
+			foreach (var region in RegionsOccupiedByActiveRace)
+			{
+				region.PickUpAllButOne();
+			}
+			
+			// 3. Let the active become the declining
+			_declining = _active;
+			_active = null;
+
+		}
+		
+		private IEnumerable<Region> RegionsOccupiedByActiveRace
+		{
+			get { return _board.Regions.Where(OccupiedByActiveRace); }
+		}
+
+		private bool OccupiedByActiveRace(Region r)
+		{
+			return r.OccupiedBy(this) && r.OccupiedBy(_active.Race);
+		}
+		
+		private bool OccupiedByDecliningRace(Region r)
+		{
+			return r.OccupiedBy(this) && r.OccupiedBy(_declining.Race);
+		}
+		
 		public void SelectNewIfNeeded()
 		{ 
-			if (_active != null) return;
+			if (HasActiveTribe) return;
 			_active = _player.SelectTribe(_availableTribes.Tribes);
 			// TODO: Check so that _active is in _availableTribes.Tribes
 			_availableTribes.Remove(_active);
@@ -45,7 +95,7 @@ namespace Smallworld
 		
 		public void GatherTokens()
 		{
-			foreach (Region r in OccupiedRegions)
+			foreach (Region r in RegionsOccupiedByActiveRace)
 			{
 				int n = r.PickUpAllButOne();
 				Console.WriteLine("{0} picks up {1} tokens", _player.Name, n);
@@ -69,7 +119,18 @@ namespace Smallworld
 				
 				if (r.RequiredTokens > _tokensInHand)
 				{
-					// TODO: Roll dice
+					Console.WriteLine("...needs to roll a {0}...", r.RequiredTokens - _tokensInHand);
+					int result = _dice.Roll();
+					if (_tokensInHand + result >= r.RequiredTokens)
+					{
+						Console.WriteLine("...and rolls a {0}", result);
+						r.OccupyBy(this, _tokensInHand);
+						_tokensInHand = 0;
+					}
+					else
+					{
+						Console.WriteLine("...but rolls a {0}", result);
+					}
 					lastAttemptPerformed = true;
 				}
 				else
@@ -102,9 +163,9 @@ namespace Smallworld
 		{
 			get
 			{
-				if (OccupiedRegions.Any()) 
+				if (_board.Regions.Where(OccupiedByActiveRace).Any()) 
 				{
-					return Regions.AdjecentTo(OccupiedRegions).Except(Edge).Where(Affordable);
+					return Regions.AdjecentTo(RegionsOccupiedByActiveRace).Except(Edge).Where(Affordable);
 				}
 				// first turn - Only edge adjecent regions are availible
 				return _board.Edge.Adjecent.Where(Affordable);

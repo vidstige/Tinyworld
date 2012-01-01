@@ -9,6 +9,8 @@ namespace Smallworld
 		
 		// Called when the player has no active tribe and needs to select a tribe.
 		Tribe SelectTribe(IEnumerable<Tribe> availableTribes);
+		
+		bool Declines();
 
 		Region Conquer(IEnumerable<Region> availibleForConquer);
 	}

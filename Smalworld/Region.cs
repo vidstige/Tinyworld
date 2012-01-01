@@ -41,6 +41,18 @@ namespace Smallworld
 		{
 			return _occupyingPlayer == player;
 		}
+
+		public bool OccupiedBy(Race race)
+		{
+			return _race == race;
+		}
+		
+		public void Extinct()
+		{
+			_occupyingPlayer = null;
+			_race = null;
+			_tokens = 0;
+		}
 		
 		public int PickUpAllButOne()
 		{

@@ -21,6 +21,12 @@ namespace Smallworld
 			return r.One(availableTribes);
 		}
 		
+		public bool Declines()
+		{
+			// decline in 33% of the turns
+			return r.Next(3) == 0;
+		}
+		
 		public Region Conquer(IEnumerable<Region> availibleForConquer)
 		{
 			return r.One(availibleForConquer);

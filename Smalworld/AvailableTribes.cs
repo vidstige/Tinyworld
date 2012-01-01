@@ -7,8 +7,14 @@ namespace Smallworld
 	public class AvailableTribes
 	{
 		private List<Tribe> _tmp =  new List<Tribe> { 
-			new Tribe(Ability.Plain, Race.Joes),
-			new Tribe(Ability.Plain, Race.Ratmen)
+			new Tribe(Ability.Plain, new Race("Ratmen", 8)),
+			new Tribe(Ability.Plain, new Race("Ratmen", 8)),
+			new Tribe(Ability.Plain, new Race("Ratmen", 8)),
+			new Tribe(Ability.Plain, new Race("Ratmen", 8)),
+			new Tribe(Ability.Plain, new Race("Ratmen", 8)),
+			new Tribe(Ability.Plain, new Race("Ratmen", 8)),
+			new Tribe(Ability.Plain, new Race("Ratmen", 8)),
+			new Tribe(Ability.Plain, new Race("Ratmen", 8))
 		};
 		
 		public IEnumerable<Tribe> Tribes
