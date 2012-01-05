@@ -10,7 +10,7 @@ namespace Smallworld
 		private readonly int _numberOfTurns;
 		private readonly IList<Player> _players;
 		
-		public Game(IEnumerable<IPlayer> players)
+		public Game(IEnumerable<IPlayer> players, IGameListener listener)
 		{
 			if (players.Count() != 2) throw new ArgumentException("players must contain 2 elements", "players");
 			_board = BoardBuilder.CreateTwoPlayer();
@@ -18,7 +18,7 @@ namespace Smallworld
 			_players = new List<Player>(2);
 			var at = new AvailableTribes();
 			var dice = new Dice(new Random(88));
-			foreach (var p in players) _players.Add(new Player(p, _board, at, dice));
+			foreach (var p in players) _players.Add(new Player(p, listener, _board, at, dice));
 		}
 		
 		public void Run()

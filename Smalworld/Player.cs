@@ -7,6 +7,7 @@ namespace Smallworld
 	internal class Player
 	{
 		private readonly IPlayer _player;
+		private readonly IGameListener _listener;
 		private readonly Board _board;
 		private readonly AvailableTribes _availableTribes;
 		private readonly Dice _dice;
@@ -17,10 +18,11 @@ namespace Smallworld
 		
 		private int _tokensInHand;
 		
-		public Player(IPlayer player, Board board, AvailableTribes availableTribes, Dice dice)
+		public Player(IPlayer player, IGameListener listener, Board board, AvailableTribes availableTribes, Dice dice)
 		{
 			if (player == null) throw new ArgumentNullException("player");
 			_player = player;
+			_listener = listener;
 			_board = board;
 			_availableTribes = availableTribes;
 			_dice = dice;
@@ -85,12 +87,9 @@ namespace Smallworld
 		{ 
 			if (HasActiveTribe) return;
 			_active = _player.SelectTribe(_availableTribes.Tribes);
-			// TODO: Check so that _active is in _availableTribes.Tribes
 			_availableTribes.Remove(_active);
-			
 			_tokensInHand = _active.StartingTokens;
-			
-			Console.WriteLine(_player.Name + " selected " + _active);
+			_listener.PlayerSelectedTribe(_player, _active);
 		}
 		
 		public void GatherTokens()
