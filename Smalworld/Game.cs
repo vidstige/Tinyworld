@@ -9,10 +9,12 @@ namespace Smallworld
 		private readonly Board _board;
 		private readonly int _numberOfTurns;
 		private readonly IList<Player> _players;
+		private readonly IGameListener _listener;
 		
 		public Game(IEnumerable<IPlayer> players, IGameListener listener)
 		{
 			if (players.Count() != 2) throw new ArgumentException("players must contain 2 elements", "players");
+			_listener = listener;
 			_board = BoardBuilder.CreateTwoPlayer();
 			_numberOfTurns = 10;
 			_players = new List<Player>(2);
@@ -25,7 +27,7 @@ namespace Smallworld
 		{
 			for (int turn = 1; turn <= _numberOfTurns; turn++)
 			{
-				Console.WriteLine("--- Turn: " + turn + " starting ---");
+				_listener.TurnStarts(turn);
 				foreach (var p in _players)
 				{
 					if (p.Declines())
