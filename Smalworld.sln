@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalworld", "Smalworld\Smal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{2D0DA2E2-B6BC-4A76-854D-48EEBA869FB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtkGUI", "GtkGUI\GtkGUI.csproj", "{3B5C7ABF-6590-4B26-9D75-847E75349F57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinyworld", "Tinyworld\Tinyworld.csproj", "{EA6138A8-00DE-40DE-ACF6-1E67033FAB6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,16 +17,16 @@ Global
 		{2D0DA2E2-B6BC-4A76-854D-48EEBA869FB8}.Debug|x86.Build.0 = Debug|x86
 		{2D0DA2E2-B6BC-4A76-854D-48EEBA869FB8}.Release|x86.ActiveCfg = Release|x86
 		{2D0DA2E2-B6BC-4A76-854D-48EEBA869FB8}.Release|x86.Build.0 = Release|x86
-		{3B5C7ABF-6590-4B26-9D75-847E75349F57}.Debug|x86.ActiveCfg = Debug|x86
-		{3B5C7ABF-6590-4B26-9D75-847E75349F57}.Debug|x86.Build.0 = Debug|x86
-		{3B5C7ABF-6590-4B26-9D75-847E75349F57}.Release|x86.ActiveCfg = Release|x86
-		{3B5C7ABF-6590-4B26-9D75-847E75349F57}.Release|x86.Build.0 = Release|x86
 		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Debug|x86.Build.0 = Debug|Any CPU
 		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8E86951-A7F4-484D-9DC0-D5A7487C27DE}.Release|x86.Build.0 = Release|Any CPU
+		{EA6138A8-00DE-40DE-ACF6-1E67033FAB6C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EA6138A8-00DE-40DE-ACF6-1E67033FAB6C}.Debug|x86.Build.0 = Debug|Any CPU
+		{EA6138A8-00DE-40DE-ACF6-1E67033FAB6C}.Release|x86.ActiveCfg = Release|Any CPU
+		{EA6138A8-00DE-40DE-ACF6-1E67033FAB6C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ConsoleApp\ConsoleApp.csproj
+		StartupItem = Tinyworld\Tinyworld.csproj
 	EndGlobalSection
 EndGlobal

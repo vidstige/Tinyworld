@@ -86,6 +86,7 @@ namespace Smallworld
 		public void SelectNewIfNeeded()
 		{ 
 			if (HasActiveTribe) return;
+			// TODO: Pay for the selected tribe
 			_active = _player.SelectTribe(_availableTribes.Tribes);
 			_availableTribes.Remove(_active);
 			_tokensInHand = _active.StartingTokens;
