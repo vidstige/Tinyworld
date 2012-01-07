@@ -98,15 +98,12 @@ namespace Smallworld
 			foreach (Region r in RegionsOccupiedByActiveRace)
 			{
 				int n = r.PickUpAllButOne();
-				Console.WriteLine("{0} picks up {1} tokens", _player.Name, n);
 				_tokensInHand += n;
 			}
 		}
 		
 		public void Conquer()
 		{
-			Console.WriteLine("{0} has {1} tokens in hand", _player.Name, _tokensInHand);
-			
 			bool lastAttemptPerformed = false;
 			while (_tokensInHand > 0 && !lastAttemptPerformed)
 			{
@@ -143,16 +140,13 @@ namespace Smallworld
 			}
 		}
 		
-		public void GainCoins ()
+		public void GainCoins()
 		{
-			int n = OccupiedRegions.Count();
-			Console.WriteLine("{0} gains {1} coins", _player.Name, n);
-			_coins += n;
+			_coins += OccupiedRegions.Count();
 		}
 
 		public void PickUp(int tokens)
 		{
-			Console.WriteLine("{0} picks up {1} tokens", _player.Name, tokens);
 			_tokensInHand += tokens;
 		}
 		
