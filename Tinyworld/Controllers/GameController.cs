@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace Tinyworld
 {
@@ -7,7 +8,11 @@ namespace Tinyworld
 	{
 		public ActionResult Show()
 		{
-			return View();
+			var list = new List<PolygonRegion>();
+			list.Add(new PolygonRegion(null, null));
+			list.Add(new PolygonRegion(null, null));
+			list.Add(new PolygonRegion(null, null));
+			return View(new Board(list));
 		}
 	}
 }

@@ -59,6 +59,7 @@
     <Compile Include="Models\PolygonRegion.cs" />
     <Compile Include="Models\Polygon.cs" />
     <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\Board.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
