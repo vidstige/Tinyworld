@@ -67,6 +67,7 @@
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
     <Content Include="Views\Game\show.aspx" />
+    <Content Include="Scripts\mapper.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

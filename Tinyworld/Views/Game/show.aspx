@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 	<title></title>
+	<script type="text/javascript" src="/Scripts/mapper.js"></script>
 </head>
 <body>
-	<img src="/Content/board.jpeg" width="1099" height="608" usemap="regionsmap" />
+	<div>		
+		<img src="/Content/board.jpeg" class="mapper icolorff0000" width="1099" height="608" usemap="regionsmap" alt="jj"/>
+	</div>
 	<map name="regionsmap">
 	<% foreach (PolygonRegion region in ViewData.Model.Regions)
        { %>
-			<area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun" />
+			<area shape="polygon" coords="<%= region.HtmlCoordinates() %>" href="#" alt="Sun" />
     <% } %>
 	</map>
 </body>

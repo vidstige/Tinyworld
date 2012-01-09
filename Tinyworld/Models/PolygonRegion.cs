@@ -13,5 +13,10 @@ namespace Tinyworld
 			_region = region;
 			_polygon = polygon;
 		}
+		
+		public string HtmlCoordinates()
+		{
+			return _polygon.GetHtmlCoordinates();
+		}
 	}
 }
