@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div>		
-		<img src="/Content/board.jpeg" class="mapper icolorff0000" width="1099" height="608" usemap="regionsmap" alt="jj"/>
+		<img src="/Content/board.jpeg" class="mapper" width="1099" height="608" usemap="#regionsmap" alt="jj"/>
 	</div>
 	<map name="regionsmap">
 	<% foreach (PolygonRegion region in ViewData.Model.Regions)
@@ -15,3 +15,4 @@
     <% } %>
 	</map>
 </body>
+</html>
