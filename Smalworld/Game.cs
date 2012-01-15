@@ -6,25 +6,39 @@ namespace Smallworld
 {
 	public class Game
 	{
+		private readonly List<string> _names;
 		private readonly Board _board;
 		private readonly int _numberOfTurns;
-		private readonly IList<Player> _players;
-		private readonly IGameListener _listener;
+		//private readonly IList<Player> _players;
+		private readonly AvailableTribes _availableTribes;
+		private readonly Dictionary<string, IGameInterface> _players =
+			new Dictionary<string, IGameInterface>(2);
 		
-		public Game(IEnumerable<IPlayer> players, IGameListener listener)
+		public Game(IEnumerable<string> names, Action<string, IGameInterface> inject)
 		{
-			if (players.Count() != 2) throw new ArgumentException("players must contain 2 elements", "players");
-			_listener = listener;
+			if (names.Count() != 2) throw new ArgumentException("names must contain 2 elements", "names");
+			_names = new List<string>(names);
 			_board = BoardBuilder.CreateTwoPlayer();
 			_numberOfTurns = 10;
-			_players = new List<Player>(2);
-			var at = new AvailableTribes();
+			//_players = new List<Player>(2);
+			_availableTribes = new AvailableTribes();
 			var dice = new Dice(new Random(88));
-			foreach (var p in players) _players.Add(new Player(p, listener, _board, at, dice));
+			foreach (var name in _names)
+			{
+				var gi = new GameInterface(this);
+				_players[name] = gi;
+				inject(name, gi);
+			}
 		}
-		
+
+		public AvailableTribes AvailableTribes
+		{
+			get { return _availableTribes; }
+		}		
+
 		public void Run()
 		{
+			/*
 			for (int turn = 1; turn <= _numberOfTurns; turn++)
 			{
 				_listener.TurnStarts(turn);
@@ -51,6 +65,7 @@ namespace Smallworld
 			{
 				Console.WriteLine("{0}: {1}", p.Name, p.Coins);
 			}
+			*/
 		}
 	}
 }

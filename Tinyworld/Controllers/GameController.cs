@@ -1,13 +1,40 @@
 using System.Web.Mvc;
 using System.Collections.Generic;
 using Smallworld;
+using System.Linq;
 
 namespace Tinyworld
 {
 	[HandleError]
 	public class GameController: Controller
 	{
+		private static readonly string GameSessionKey = "SmallworldGame";
+		
+		private GameModel Model
+		{
+			get
+			{
+				if (Session[GameSessionKey] == null)
+				{
+					Session[GameSessionKey] = new GameModel(CreateList());
+				}
+				return (GameModel)Session[GameSessionKey];
+			}
+		}
+		
 		public ActionResult Show()
+		{
+			return View("show", Model);
+		}
+		
+		public ActionResult Select(string race)
+		{
+			Tribe selected = Model.AvailableTribes.First(tribe => tribe.ToString() == race);
+			Model.CurrentWebPlayer.SelectTribe(selected);
+			return View("show", Model);
+		}
+		
+		private List<PolygonRegion> CreateList()
 		{
 			var list = new List<PolygonRegion>();
 			list.Add(Create(null, "11,22,302,18,310,40,304,57,306,75,312,108,293,131,243,135,223,149,188,149,160,183,142,193,121,186,118,192,106,185,69,183,57,202,30,203,20,189,11,197"));
@@ -33,7 +60,7 @@ namespace Tinyworld
 			list.Add(Create(null, "849,406,867,394,888,387,917,379,937,369,949,356,961,363,973,376,983,400,995,407,999,416,1007,426,1006,444,993,457,988,469,980,473,978,483,960,494,947,494,929,500,891,502,886,490,873,480,864,461,857,444,856,424"));
 			list.Add(Create(null, "1077,264,1064,274,1048,261,1026,249,1015,241,1002,247,982,254,958,262,927,273,931,285,928,295,934,302,935,325,935,335,940,342,948,356,963,365,975,382,984,400,994,407,1000,414,1008,426,1039,418,1072,418"));
 			list.Add(Create(null, "811,588,823,560,835,554,839,547,853,542,860,531,863,516,870,508,888,502,927,501,942,496,957,493,972,487,980,481,980,473,990,468,992,459,1006,444,1006,424,1037,419,1072,419,1068,580"));			
-			return View(new Board(list));
+			return list;
 		}
 		
 		private PolygonRegion Create(Region region, string polygonPoints)

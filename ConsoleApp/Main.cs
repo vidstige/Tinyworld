@@ -7,9 +7,9 @@ namespace ConsoleApp
 	{
 		public static void Main (string[] args)
 		{
-			var players = new [] { new RandomPlayer("Samuel"), new RandomPlayer("Lisa") };
-			var game = new Game(players, new SmallworldTextOutput(Console.Out));
-			game.Run();
+			//var players = new [] { new RandomPlayer("Samuel"), new RandomPlayer("Lisa") };
+			//var game = new Game(players, new SmallworldTextOutput(Console.Out));
+			//game.Run();
 		}
 	}
 }

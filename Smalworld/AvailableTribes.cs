@@ -19,7 +19,7 @@ namespace Smallworld
 		
 		public IEnumerable<Tribe> Tribes
 		{
-			get { return _tmp; }
+			get { return _tmp.Take(6); }
 		}
 
 		public void Remove(Tribe tribe)

@@ -53,6 +53,8 @@
     <Compile Include="Common\RandomExtensions.cs" />
     <Compile Include="IGameListener.cs" />
     <Compile Include="NoListener.cs" />
+    <Compile Include="IGameInterface.cs" />
+    <Compile Include="GameInterface.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
