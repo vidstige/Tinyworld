@@ -79,8 +79,8 @@ namespace Smallworld
 		{
 			private readonly Game _game;
 			private readonly string _name;
-			private readonly Tribe _active;
-			private readonly Tribe _declining;
+			private Tribe _active;
+			private Tribe _declining;
 			
 			private int _tokens;
 				
@@ -93,7 +93,6 @@ namespace Smallworld
 			private Board Board { get { return _game._board; } }
 	
 			#region IGameInterface implementation
-			public event Action TurnStarting;
 	
 			public bool CanSelectTribe { get { throw new NotImplementedException (); } }
 
@@ -101,7 +100,8 @@ namespace Smallworld
 			{
 				// TODO: Check so tribe exist in available tribes
 				_active = tribe;
-				// TODO: Remove tribe
+				_game.AvailableTribes.Remove(tribe);
+				_tokens = tribe.StartingTokens;
 			}
 	
 			public bool CanAbandon {
