@@ -7,6 +7,12 @@ namespace Tinyworld
 	{
 		public WebPlayer(string name, IGameInterface gameInterface)
 		{
+			Interface = gameInterface;
+		}
+		
+		public IGameInterface Interface
+		{
+			get; private set;
 		}
 	}
 }
