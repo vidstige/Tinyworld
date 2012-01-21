@@ -6,7 +6,6 @@ namespace Smallworld
 {
 	public class Game
 	{
-		private readonly List<string> _names;
 		private readonly Board _board;
 		private readonly int _numberOfTurns;
 		private readonly AvailableTribes _availableTribes;
@@ -18,13 +17,12 @@ namespace Smallworld
 		public Game(IEnumerable<string> names, Action<string, IGameInterface> inject)
 		{
 			if (names.Count() != 2) throw new ArgumentException("names must contain 2 elements", "names");
-			_names = new List<string>(names);
 			_board = BoardBuilder.CreateTwoPlayer();
 			_numberOfTurns = 10;
 			_players = new List<GameInterface>(2);
 			_availableTribes = new AvailableTribes();
 			var dice = new Dice(new Random(88));
-			foreach (var name in _names)
+			foreach (var name in names)
 			{
 				var gi = new GameInterface(name, this);
 				_players.Add(gi);
@@ -39,7 +37,7 @@ namespace Smallworld
 		
 		public string CurrentPlayer
 		{
-			get { return _names[_currentPlayerIndex]; }
+			get { return _players[_currentPlayerIndex].Name; }
 		}
 
 		public void Run()
@@ -90,6 +88,8 @@ namespace Smallworld
 				_game = game;
 			}
 			
+			public string Name { get { return _name; }}
+			
 			private Board Board { get { return _game._board; } }
 	
 			#region IGameInterface implementation
@@ -104,7 +104,8 @@ namespace Smallworld
 				_tokens = tribe.StartingTokens;
 			}
 	
-			public bool CanAbandon {
+			public bool CanAbandon
+			{
 				get
 				{
 					throw new NotImplementedException ();
