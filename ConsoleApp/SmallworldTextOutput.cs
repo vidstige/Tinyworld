@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 
 namespace ConsoleApp
 {
     class SmallworldTextOutput
     {
+        private TextWriter textWriter;
+
+        public SmallworldTextOutput(TextWriter textWriter)
+        {
+            this.textWriter = textWriter;
+        }
     }
 }

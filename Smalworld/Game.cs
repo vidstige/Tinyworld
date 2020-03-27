@@ -9,24 +9,27 @@ namespace Smallworld
 		private readonly Board _board;
 		private readonly int _numberOfTurns;
 		private readonly AvailableTribes _availableTribes;
-		private readonly List<GameInterface> _players;
-		
+        private readonly IList<IPlayer> _players = new List<IPlayer>();
+        private readonly IList<GameInterface> _gis = new List<GameInterface>();
+
+        private readonly IGameListener _listener;
+
 		private int _currentTurn;
 		private int _currentPlayerIndex = 0;
 		
-		public Game(IEnumerable<string> names, Action<string, IGameInterface> inject)
+		public Game(IEnumerable<IPlayer> players, Action<string, IGameInterface> inject)
 		{
-			if (names.Count() != 2) throw new ArgumentException("names must contain 2 elements", "names");
+            if (players.Count() != 2) throw new ArgumentException("names must contain 2 elements", "names");
 			_board = BoardBuilder.CreateTwoPlayer();
 			_numberOfTurns = 10;
-			_players = new List<GameInterface>(2);
 			_availableTribes = new AvailableTribes();
 			var dice = new Dice(new Random(88));
-			foreach (var name in names)
+            foreach (var player in players)
 			{
-				var gi = new GameInterface(name, this);
-				_players.Add(gi);
-				inject(name, gi);
+				var gi = new GameInterface(player.Name, this);
+				_players.Add(player);
+                _gis.Add(gi);
+				inject(player.Name, gi);
 			}
 		}
 
@@ -42,34 +45,33 @@ namespace Smallworld
 
 		public void Run()
 		{
-			/*
 			for (int turn = 1; turn <= _numberOfTurns; turn++)
 			{
 				_listener.TurnStarts(turn);
 				foreach (var p in _players)
 				{
+                    var gi = _gis.Where(g => g.Name == p.Name);
 					if (p.Declines())
 					{
 						Console.WriteLine("{0} declines", p.Name);
-						p.Decline();
+                        //gi.Decline();
 					}
 					else
 					{
-						p.SelectNewIfNeeded();
-						p.GatherTokens();
+                        p.SelectNewIfNeeded();
+                        p.GatherTokens();
 						// TODO: Allow the player to abandon regions
-						p.Conquer();
+                        p.Conquer();
 						// TODO: Allow player to distribute tokens
 					}
-					p.GainCoins();
+					gi.GainCoins();
 				}
 			}
 			Console.WriteLine("Game Over");
-			foreach (var p in _players)
+			foreach (var g in _gis)
 			{
-				Console.WriteLine("{0}: {1}", p.Name, p.Coins);
+				Console.WriteLine("{0}: {1}", g.Name, g.Coins);
 			}
-			*/
 		}
 		
 		// TODO: Rename to "Player"?
@@ -79,13 +81,15 @@ namespace Smallworld
 			private readonly string _name;
 			private Tribe _active;
 			private Tribe _declining;
-			
+
+            private int _coins;
 			private int _tokens;
 				
 			public GameInterface(string name, Game game)
 			{
 				_name = name;
 				_game = game;
+                _coins = 0;
 			}
 			
 			public string Name { get { return _name; }}
@@ -174,6 +178,11 @@ namespace Smallworld
 					throw new NotImplementedException ();
 				}
 			}
+            
+            public int Coins
+            {
+                get { return _coins; }
+            }
 			#endregion
 		}
 	}

@@ -31,5 +31,12 @@ namespace Smallworld
 		{
 			return r.One(availibleForConquer);
 		}
+
+        public void GatherTokens()
+        {
+        }
+        public void SelectNewIfNeeded()
+        {
+        }
 	}
 }

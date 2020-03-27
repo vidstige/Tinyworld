@@ -13,5 +13,8 @@ namespace Smallworld
 		bool Declines();
 
 		Region Conquer(IEnumerable<Region> availibleForConquer);
+
+        void GatherTokens();
+        void SelectNewIfNeeded();
 	}
 }
